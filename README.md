@@ -1,4 +1,4 @@
-# auth
+# authy
 
 To install dependencies:
 
