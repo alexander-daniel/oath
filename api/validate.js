@@ -7,18 +7,24 @@ export default function (req, res) {
 
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(400).send("Authorization header is required.");
+    return res.status(400).send({
+      message: "Authorization header is required.",
+    });
   }
 
   const token = authHeader.split(" ")[1];
   if (!token) {
-    return res.status(400).send("Token is required.");
+    return res.status(400).send({
+      message: "Token is required.",
+    });
   }
 
   try {
     jwt.verify(token, process.env.JWT_SECRET);
     res.status(200).json({ valid: true });
   } catch (err) {
-    res.status(401).send("Invalid or expired token.");
+    res.status(401).send({
+      message: "Invalid or expired token.",
+    });
   }
 }

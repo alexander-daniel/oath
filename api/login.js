@@ -13,7 +13,9 @@ export default async function (req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
   if (req.method !== "POST") {
-    return res.status(405).send("Method Not Allowed");
+    return res.status(405).send({
+      message: "Method Not Allowed",
+    });
   }
 
   const redis = new Redis(process.env.REDIS_URL);
@@ -21,17 +23,23 @@ export default async function (req, res) {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).send("Username and password are required.");
+    return res.status(400).send({
+      message: "Username and password are required.",
+    });
   }
 
   const storedHash = await redis.hget("users", username);
   if (!storedHash) {
-    return res.status(401).send("Invalid username or password.");
+    return res.status(401).send({
+      message: "Invalid username or password.",
+    });
   }
 
   const isMatch = await bcrypt.compare(password, storedHash);
   if (!isMatch) {
-    return res.status(401).send("Invalid username or password.");
+    return res.status(401).send({
+      message: "Invalid username or password.",
+    });
   }
 
   const token = createToken({ username });
