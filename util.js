@@ -5,3 +5,11 @@ export function createToken(opts) {
     expiresIn: "1h",
   });
 }
+
+export function verifyClient(req) {
+  const clientId = req.headers["x-client-id"];
+  console.log(req.headers);
+  if (!process.env.CLIENT_IDS.split(",").includes(clientId)) {
+    throw new Error(`Client ${clientId} is not authorized.`);
+  }
+}
