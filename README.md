@@ -1,4 +1,4 @@
-# authy
+# Oath
 
 To install dependencies:
 
