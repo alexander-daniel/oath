@@ -10,11 +10,12 @@ export default async function (req, res) {
     return res.status(200).end();
   }
 
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
 
-  console.log("req", req.body);
   const redis = new Redis(process.env.REDIS_URL);
 
   const { username, password } = req.body;
