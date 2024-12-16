@@ -3,8 +3,7 @@
   "module": "index.js",
   "type": "module",
   "scripts": {
-    "start": "bun index.js",
-    "dev": "bun --watch index.js"
+    "start": "vercel dev"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
