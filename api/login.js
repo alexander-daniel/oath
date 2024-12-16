@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import Redis from "ioredis";
 import { createToken } from "../util";
 

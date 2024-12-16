@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import Redis from "ioredis";
+import { createToken } from "../util";
 
 export default async function (req, res) {
   if (req.method !== "POST") {
