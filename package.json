@@ -1,0 +1,18 @@
+{
+  "name": "auth",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "bun index.js",
+    "dev": "bun --watch index.js"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bun-vercel": "^1.0.0-alpha.5",
+    "jsonwebtoken": "^9.0.0",
+    "redis": "^4.6.5"
+  }
+}
