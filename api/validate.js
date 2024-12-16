@@ -16,8 +16,8 @@ export default function (req, res) {
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json({ valid: true, payload });
+    jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ valid: true });
   } catch (err) {
     res.status(401).send("Invalid or expired token.");
   }
