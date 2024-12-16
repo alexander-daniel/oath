@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Redis from "ioredis";
+import { createToken } from "../util";
 
 export default async function (req, res) {
   if (req.method !== "POST") {
@@ -25,9 +26,7 @@ export default async function (req, res) {
     return res.status(401).send("Invalid username or password.");
   }
 
-  const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = createToken({ username });
 
   res.status(200).json({ token });
 }

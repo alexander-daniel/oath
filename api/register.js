@@ -22,5 +22,10 @@ export default async function (req, res) {
   const passwordHash = await bcrypt.hash(password, 10);
   await redis.hset("users", username, passwordHash);
 
-  res.status(201).send("User registered successfully.");
+  const token = createToken({ username });
+
+  res.status(201).send({
+    token,
+    message: "User registered successfully.",
+  });
 }
