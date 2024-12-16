@@ -1,14 +1,13 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { createClient } from "redis";
-
-const redis = createClient({ url: process.env.REDIS_URL });
-await redis.connect();
+import Redis from "ioredis";
 
 export default async function (req, res) {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
+
+  const redis = new Redis(process.env.REDIS_URL);
 
   const { username, password } = req.body;
 
@@ -16,7 +15,7 @@ export default async function (req, res) {
     return res.status(400).send("Username and password are required.");
   }
 
-  const storedHash = await redis.hGet("users", username);
+  const storedHash = await redis.hget("users", username);
   if (!storedHash) {
     return res.status(401).send("Invalid username or password.");
   }
