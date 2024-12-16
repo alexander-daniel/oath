@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-    "REDIS_URL": "@REDIS_URL",
-    "JWT_SECRET": "@JWT_SECRET"
+    "REDIS_URL": "@redis_url",
+    "JWT_SECRET": "@jwt_secret"
   },
   "builds": [
     {
